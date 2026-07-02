@@ -1,0 +1,12 @@
+<svg width="380" height="100" viewBox="0 0 380 100" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CyberCap">
+  <!-- Mark (light version for dark backgrounds) -->
+  <g transform="translate(8,14) scale(0.72)">
+    <path d="M50 6 L88 20 V52 C88 74 71 90 50 96 C29 90 12 74 12 52 V20 Z" fill="#FFFFFF" fill-opacity="0.08" stroke="#FFFFFF" stroke-width="3"/>
+    <path d="M64 36 A21 21 0 1 0 64 66" fill="none" stroke="#17B6A7" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="64" cy="51" r="5.5" fill="#FFFFFF"/>
+  </g>
+  <!-- Wordmark -->
+  <text x="92" y="63" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="44" font-weight="700" letter-spacing="-0.5">
+    <tspan fill="#FFFFFF">Cyber</tspan><tspan fill="#17B6A7">Cap</tspan>
+  </text>
+</svg>

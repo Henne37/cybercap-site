@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import CTABand from '../components/CTABand.astro';
+import Icon from '../components/Icon.astro';
+
+const values = [
+  { t: 'Independence', d: 'We don’t resell software. Our advice serves you, not a vendor.' },
+  { t: 'Plain language', d: 'Security is complex; explaining it badly is a choice. We don’t make it.' },
+  { t: 'Doing, not just advising', d: 'We stay until the work is actually done.' },
+];
+
+const experience = [
+  '7+ active engagements across aviation, fintech, insurance, telecom and IT services.',
+  'Delivery across the full lifecycle: assessment → gap analysis → implementation → audit → certification → ongoing management.',
+  'Roles held: vCISO / CISO-as-a-Service, virtual DPO, ISMS & Compliance Manager.',
+  'Frameworks: ISO/IEC 27001, ISO 9001, NIS2, DORA, GDPR, CyberFundamentals, BCP/BCM and aviation safety (ED-153 / ED-109A).',
+];
+---
+
+<Base
+  title="About CyberCap"
+  description="Independent, practical cybersecurity and compliance advisors for European businesses."
+>
+  <section class="bg-mist">
+    <div class="container-c py-16 lg:py-20">
+      <p class="eyebrow">About us</p>
+      <h1 class="h1 mt-3">People you can trust with the hard part.</h1>
+      <p class="mt-5 max-w-2xl text-lg leading-relaxed text-slate">
+        CyberCap was founded on a simple belief: cybersecurity and compliance shouldn’t be something companies face alone,
+        or something only big enterprises can afford to do well.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-c grid gap-12 py-16 lg:grid-cols-2">
+    <div>
+      <h2 class="text-2xl font-bold text-ink">Our story</h2>
+      <p class="mt-4 text-lg leading-relaxed text-slate">
+        CyberCap was built on hands-on experience helping European companies meet the frameworks they’re held to —
+        ISO 27001, NIS2, DORA and GDPR — across aviation, finance, insurance, telecom and IT services. We kept seeing
+        the same problem: businesses that knew they <em>had</em> to act, but were met with either jargon-heavy consultants
+        or tool vendors with something to sell. We do it differently: independent, practical, and hands-on.
+      </p>
+
+      <h2 class="mt-10 text-2xl font-bold text-ink">What we stand for</h2>
+      <div class="mt-5 space-y-4">
+        {values.map((v) => (
+          <div class="flex gap-4">
+            <span class="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-teal/10 text-teal">
+              <Icon name="check" class="h-4 w-4" />
+            </span>
+            <p class="text-slate"><strong class="text-ink">{v.t}.</strong> {v.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div>
+      <div class="rounded-2xl border border-cloud p-7">
+        <h2 class="text-xl font-bold text-ink">Experience at a glance</h2>
+        <ul class="mt-5 space-y-4">
+          {experience.map((e) => (
+            <li class="flex gap-3 text-slate">
+              <Icon name="check" class="mt-1 h-4 w-4 shrink-0 text-teal" />
+              <span>{e}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <p class="mt-4 text-sm text-slate">
+        <!-- TODO: add formal certifications (e.g. ISO 27001 Lead Auditor, CISSP, CISM, CIPP/E) if you hold them. -->
+        Certifications and references available on request.
+      </p>
+    </div>
+  </section>
+
+  <CTABand />
+</Base>

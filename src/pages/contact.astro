@@ -1,0 +1,143 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+
+const formAction = site.formspreeId ? `https://formspree.io/f/${site.formspreeId}` : '';
+const calLink = site.calLink || '';
+---
+
+<Base
+  title="Contact CyberCap"
+  description="Book a free 30-minute consult. Tell us where you are and we’ll map your next step."
+>
+  <section class="bg-ink">
+    <div class="container-c py-16 lg:py-20">
+      <p class="eyebrow">Let’s talk</p>
+      <h1 class="h1 mt-3 text-white">Tell us where you are.</h1>
+      <p class="mt-5 max-w-2xl text-lg leading-relaxed text-white/75">
+        The first call is free, 30 minutes, and there’s no obligation — just a clear sense of your next step.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-c grid gap-12 py-16 lg:grid-cols-3">
+    <div class="lg:col-span-2">
+      <form id="contact-form" data-action={formAction} action={formAction} method="POST" class="grid gap-5 rounded-2xl border border-cloud p-7">
+        <div class="grid gap-5 sm:grid-cols-2">
+          <label class="block">
+            <span class="text-sm font-medium text-ink">Name *</span>
+            <input required name="name" type="text" class="mt-1 w-full rounded-lg border border-cloud px-4 py-3 focus:border-teal focus:outline-none focus:ring-2 focus:ring-teal/30" />
+          </label>
+          <label class="block">
+            <span class="text-sm font-medium text-ink">Company *</span>
+            <input required name="company" type="text" class="mt-1 w-full rounded-lg border border-cloud px-4 py-3 focus:border-teal focus:outline-none focus:ring-2 focus:ring-teal/30" />
+          </label>
+        </div>
+        <div class="grid gap-5 sm:grid-cols-2">
+          <label class="block">
+            <span class="text-sm font-medium text-ink">Email *</span>
+            <input required name="email" type="email" class="mt-1 w-full rounded-lg border border-cloud px-4 py-3 focus:border-teal focus:outline-none focus:ring-2 focus:ring-teal/30" />
+          </label>
+          <label class="block">
+            <span class="text-sm font-medium text-ink">Phone</span>
+            <input name="phone" type="tel" class="mt-1 w-full rounded-lg border border-cloud px-4 py-3 focus:border-teal focus:outline-none focus:ring-2 focus:ring-teal/30" />
+          </label>
+        </div>
+        <label class="block">
+          <span class="text-sm font-medium text-ink">What do you need help with? *</span>
+          <select required name="need" class="mt-1 w-full rounded-lg border border-cloud bg-white px-4 py-3 focus:border-teal focus:outline-none focus:ring-2 focus:ring-teal/30">
+            <option value="">Select…</option>
+            <option>Assessment / audit</option>
+            <option>Implementation</option>
+            <option>Ongoing support / manpower</option>
+            <option>Not sure yet</option>
+          </select>
+        </label>
+        <label class="block">
+          <span class="text-sm font-medium text-ink">Message</span>
+          <textarea name="message" rows="4" class="mt-1 w-full rounded-lg border border-cloud px-4 py-3 focus:border-teal focus:outline-none focus:ring-2 focus:ring-teal/30"></textarea>
+        </label>
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true" />
+        <button type="submit" class="btn-primary w-full sm:w-auto">Send my enquiry</button>
+        <p id="form-status" class="hidden text-sm" role="status" aria-live="polite"></p>
+        <p class="text-xs text-slate">We’ll only use your details to respond to your enquiry. See our <a href="/privacy" class="text-link underline">Privacy Policy</a>.</p>
+      </form>
+    </div>
+
+    <aside class="space-y-6">
+      <div class="rounded-2xl bg-mist p-6">
+        <h2 class="text-lg font-bold text-ink">Reach us directly</h2>
+        <ul class="mt-4 space-y-3 text-slate">
+          <li class="flex items-center gap-3"><Icon name="arrow" class="h-4 w-4 text-teal" /><a href={`mailto:${site.email}`} class="hover:text-ink">{site.email}</a></li>
+          <li class="flex items-center gap-3"><Icon name="arrow" class="h-4 w-4 text-teal" />{site.phone}</li>
+          <li class="flex items-center gap-3"><Icon name="arrow" class="h-4 w-4 text-teal" />{site.address}</li>
+        </ul>
+      </div>
+    </aside>
+  </section>
+
+  <section class="container-c pb-16">
+    <div class="rounded-2xl border border-cloud p-7">
+      <h2 class="text-2xl font-bold text-ink">Prefer to pick a time?</h2>
+      <p class="mt-2 text-slate">Grab a 30-minute slot that suits you.</p>
+      <div id="cal-inline" data-cal-link={calLink} class="mt-6 w-full overflow-auto rounded-xl"></div>
+      <a id="cal-fallback" href={site.bookingUrl} class="btn-secondary mt-6">Open scheduler</a>
+    </div>
+  </section>
+</Base>
+
+<script is:inline>
+  // Contact form: AJAX submit with success/error messaging.
+  (function () {
+    var form = document.getElementById('contact-form');
+    var status = document.getElementById('form-status');
+    if (!form) return;
+    function setStatus(msg, ok) {
+      status.textContent = msg;
+      status.classList.remove('hidden');
+      status.style.color = ok ? '#0F9488' : '#DC2626';
+    }
+    form.addEventListener('submit', function (e) {
+      var action = form.getAttribute('data-action');
+      if (!action) {
+        e.preventDefault();
+        setStatus('Form not configured yet — add your Formspree ID in src/data/site.ts.', false);
+        return;
+      }
+      e.preventDefault();
+      var btn = form.querySelector('button[type="submit"]');
+      var original = btn.textContent;
+      btn.disabled = true; btn.textContent = 'Sending…';
+      fetch(action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } })
+        .then(function (res) {
+          if (res.ok) { form.reset(); setStatus('Thanks — your message is on its way. We’ll be in touch shortly.', true); }
+          else { setStatus('Something went wrong. Please email us directly instead.', false); }
+        })
+        .catch(function () { setStatus('Network error. Please email us directly instead.', false); })
+        .finally(function () { btn.disabled = false; btn.textContent = original; });
+    });
+  })();
+
+  // Cal.com inline embed: only initialises when a calLink is configured.
+  (function () {
+    var el = document.getElementById('cal-inline');
+    var fallback = document.getElementById('cal-fallback');
+    var calLink = el ? el.getAttribute('data-cal-link') : '';
+    if (!el || !calLink) { if (el) el.style.display = 'none'; return; }
+    if (fallback) fallback.style.display = 'none';
+    el.style.minHeight = '600px';
+    (function (C, A, L) {
+      var p = function (a, ar) { a.q.push(ar); };
+      var d = C.document;
+      C.Cal = C.Cal || function () {
+        var cal = C.Cal; var ar = arguments;
+        if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement('script')).src = A; cal.loaded = true; }
+        if (ar[0] === L) { var api = function () { p(api, arguments); }; var namespace = ar[1]; api.q = api.q || []; if (typeof namespace === 'string') { cal.ns[namespace] = api; p(api, ar); } else { p(cal, ar); } return; }
+        p(cal, ar);
+      };
+    })(window, 'https://app.cal.com/embed/embed.js', 'init');
+    window.Cal('init', { origin: 'https://app.cal.com' });
+    window.Cal('inline', { elementOrSelector: '#cal-inline', calLink: calLink, layout: 'month_view' });
+  })();
+</script>

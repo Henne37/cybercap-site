@@ -1,0 +1,48 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { site } from '../data/site';
+const updated = '30 June 2026';
+// TODO: keep this accurate to the tools you actually load. If you stick to a cookieless analytics tool
+// (Plausible/Fathom), you can run without a consent banner. If you add tools that set non-essential
+// cookies, you must add a consent banner and update this page.
+---
+<Legal
+  title="Cookie Policy | CyberCap"
+  description="How CyberCap uses cookies and similar technologies."
+  heading="Cookie Policy"
+  updated={updated}
+>
+  <p>
+    This Cookie Policy explains how <strong>{site.name}</strong> uses cookies and similar technologies on this website.
+  </p>
+
+  <h2>1. Our approach</h2>
+  <p>
+    We keep tracking to a minimum. Our website is designed to work without non-essential cookies. We use a
+    privacy-friendly analytics tool that does not use cookies to identify you and does not track you across
+    other websites, so we do not display intrusive cookie banners for advertising.
+  </p>
+
+  <h2>2. Cookies we use</h2>
+  <ul>
+    <li><strong>Strictly necessary</strong> — a small number of technical cookies may be required for the site to function and be served securely. These do not require consent under the GDPR/ePrivacy rules.</li>
+    <li><strong>Analytics (privacy-friendly)</strong> — aggregated, anonymous usage statistics. [Confirm the tool you use, e.g. Plausible or Fathom, and whether it is cookieless.]</li>
+  </ul>
+
+  <h2>3. Third-party content</h2>
+  <p>
+    If you choose to book a call, our scheduling provider's embedded tool may set its own cookies when you
+    interact with it. Please refer to that provider's cookie/privacy policy for details.
+  </p>
+
+  <h2>4. Managing cookies</h2>
+  <p>
+    You can control and delete cookies through your browser settings. Blocking strictly necessary cookies may
+    affect how the site works.
+  </p>
+
+  <h2>5. More information</h2>
+  <p>See our <a href="/privacy">Privacy Policy</a> for how we handle personal data, or contact us at <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+
+  <p class="mt-10 text-sm text-slate"><em>This document is a template provided to help you launch. Please confirm it matches the tools you load and have it reviewed before relying on it.</em></p>
+</Legal>

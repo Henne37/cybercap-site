@@ -1,0 +1,73 @@
+---
+import Legal from '../layouts/Legal.astro';
+import { site } from '../data/site';
+const updated = '30 June 2026';
+// TODO before launch: confirm legal entity name, DPO/contact, retention periods, and the exact
+// list of processors you use (form provider, host, analytics, scheduler). Have a professional review.
+---
+<Legal
+  title="Privacy Policy | CyberCap"
+  description="How CyberCap collects, uses and protects your personal data, in line with the GDPR."
+  heading="Privacy Policy"
+  updated={updated}
+>
+  <p>
+    This Privacy Policy explains how <strong>{site.name}</strong> ("we", "us") collects, uses and protects
+    your personal data when you visit our website or contact us. We process personal data in accordance with
+    the EU General Data Protection Regulation (GDPR) and applicable Belgian law.
+  </p>
+
+  <h2>1. Who we are (data controller)</h2>
+  <p>
+    {site.name}<br />
+    {site.address}<br />
+    VAT: {site.vat}<br />
+    Email: <a href={`mailto:${site.email}`}>{site.email}</a>
+  </p>
+
+  <h2>2. What data we collect</h2>
+  <ul>
+    <li><strong>Contact details you give us</strong> — when you submit the contact form or email us: your name, company, email address, phone number (optional) and the content of your message.</li>
+    <li><strong>Usage data</strong> — limited, privacy-friendly analytics about how the site is used (e.g. pages visited). We use an analytics tool that does not track you across sites and does not build advertising profiles.</li>
+    <li><strong>Technical data</strong> — standard server information such as your browser type, needed to deliver the site securely.</li>
+  </ul>
+
+  <h2>3. Why we use it and our legal basis</h2>
+  <ul>
+    <li><strong>To respond to your enquiry and provide our services</strong> — legal basis: your consent and/or steps taken at your request prior to entering a contract (Art. 6(1)(a)/(b) GDPR).</li>
+    <li><strong>To understand and improve our website</strong> — legal basis: our legitimate interest in running and improving the site (Art. 6(1)(f) GDPR).</li>
+    <li><strong>To comply with legal obligations</strong> — legal basis: legal obligation (Art. 6(1)(c) GDPR).</li>
+  </ul>
+
+  <h2>4. How long we keep it</h2>
+  <p>
+    We keep enquiry data only as long as necessary to handle your request and for any resulting business
+    relationship, after which it is deleted or anonymised. [Specify your retention period, e.g. enquiries
+    that do not lead to an engagement are deleted within 12 months.]
+  </p>
+
+  <h2>5. Who we share it with</h2>
+  <p>
+    We do not sell your data. We share it only with service providers that help us run our business, acting
+    as our processors under appropriate agreements, including:
+  </p>
+  <ul>
+    <li>Our website host / hosting provider.</li>
+    <li>Our form-handling provider (used to deliver contact-form submissions to us).</li>
+    <li>Our scheduling provider (if you book a call).</li>
+    <li>Our privacy-friendly analytics provider.</li>
+  </ul>
+  <p>Where any provider processes data outside the EEA, we ensure appropriate safeguards (such as EU Standard Contractual Clauses) are in place.</p>
+
+  <h2>6. Your rights</h2>
+  <p>Under the GDPR you have the right to access, rectify, erase, restrict or object to the processing of your personal data, and the right to data portability. You can also withdraw consent at any time. To exercise these rights, contact us at <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+  <p>You also have the right to lodge a complaint with the Belgian Data Protection Authority (Gegevensbeschermingsautoriteit / Autorité de protection des données), <a href="https://www.dataprotectionauthority.be" rel="noopener">www.dataprotectionauthority.be</a>.</p>
+
+  <h2>7. Security</h2>
+  <p>We apply appropriate technical and organisational measures to protect your data — fittingly, given security and compliance is what we do. The site is served over HTTPS.</p>
+
+  <h2>8. Changes</h2>
+  <p>We may update this policy from time to time. The "last updated" date above reflects the latest version.</p>
+
+  <p class="mt-10 text-sm text-slate"><em>This document is a template provided to help you launch. Please have it reviewed by a qualified professional before relying on it.</em></p>
+</Legal>

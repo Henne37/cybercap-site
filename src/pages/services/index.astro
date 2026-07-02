@@ -1,0 +1,34 @@
+---
+import Base from '../../layouts/Base.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import CTABand from '../../components/CTABand.astro';
+import { services } from '../../data/site';
+---
+
+<Base
+  title="Services — Cybersecurity & Compliance | CyberCap"
+  description="Assessments, implementation and ongoing operational support for NIS2, ISO 27001, GDPR and DORA. One partner across the full compliance lifecycle."
+>
+  <section class="bg-mist">
+    <div class="container-c py-16 lg:py-20">
+      <p class="eyebrow">How we help</p>
+      <h1 class="h1 mt-3">Services built around what you actually need</h1>
+      <p class="mt-5 max-w-2xl text-lg leading-relaxed text-slate">
+        Most companies come to us with one of three needs: they need to <strong class="text-ink">know</strong> where they stand,
+        they need to <strong class="text-ink">fix</strong> what’s missing, or they need <strong class="text-ink">ongoing</strong> expertise
+        to keep things running. We’ve built our services around exactly that — start with whichever fits, they connect naturally.
+      </p>
+    </div>
+  </section>
+
+  <section class="container-c py-16">
+    <div class="grid gap-6 md:grid-cols-3">
+      {services.map((s) => <ServiceCard {...s} />)}
+    </div>
+  </section>
+
+  <CTABand
+    title="Not sure which you need?"
+    text="That’s exactly what the free consult is for. Tell us where you are and we’ll point you to the right starting place."
+  />
+</Base>

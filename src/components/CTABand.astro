@@ -1,0 +1,17 @@
+---
+interface Props { title?: string; text?: string; }
+const {
+  title = 'Not sure where you stand?',
+  text = 'A 30-minute call is the fastest way to find out. No pressure, no jargon — just a clear sense of your next step.',
+} = Astro.props;
+---
+<section class="bg-ink">
+  <div class="container-c py-16 text-center">
+    <h2 class="h2 text-white">{title}</h2>
+    <p class="mx-auto mt-4 max-w-2xl text-lg text-white/70">{text}</p>
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a href="/contact" class="btn-primary">Book a free consult</a>
+      <a href="/services" class="btn-ghost-light">Explore services</a>
+    </div>
+  </div>
+</section>

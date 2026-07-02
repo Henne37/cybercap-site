@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-ink font-sans antialiased;
+}
+
+@layer components {
+  .container-c {
+    @apply mx-auto w-full max-w-content px-5 sm:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-lg bg-teal px-6 py-3 font-semibold text-white transition hover:bg-teal-dark focus:outline-none focus:ring-2 focus:ring-teal focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-lg border border-cloud bg-white px-6 py-3 font-semibold text-ink transition hover:border-slate hover:bg-mist;
+  }
+
+  .btn-ghost-light {
+    @apply inline-flex items-center justify-center rounded-lg border border-white/30 px-6 py-3 font-semibold text-white transition hover:bg-white/10;
+  }
+
+  .eyebrow {
+    @apply text-sm font-semibold uppercase tracking-wider text-teal;
+  }
+
+  .h1 {
+    @apply text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl;
+  }
+
+  .h2 {
+    @apply text-3xl font-bold tracking-tight sm:text-4xl;
+  }
+
+  .prose-c p {
+    @apply text-lg leading-relaxed text-slate;
+  }
+
+  .legal h2 {
+    @apply mt-10 text-xl font-bold text-ink;
+  }
+  .legal h3 {
+    @apply mt-6 text-lg font-semibold text-ink;
+  }
+  .legal p {
+    @apply mt-3 leading-relaxed text-slate;
+  }
+  .legal ul {
+    @apply mt-3 list-disc space-y-2 pl-6 text-slate;
+  }
+  .legal a {
+    @apply text-link underline;
+  }
+  .legal strong {
+    @apply text-ink;
+  }
+}

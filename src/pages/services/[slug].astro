@@ -1,0 +1,76 @@
+---
+import Base from '../../layouts/Base.astro';
+import CTABand from '../../components/CTABand.astro';
+import Icon from '../../components/Icon.astro';
+import { serviceDetails } from '../../data/serviceDetails';
+
+export function getStaticPaths() {
+  return Object.keys(serviceDetails).map((slug) => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const d = serviceDetails[slug as string];
+
+const metaMap: Record<string, string> = {
+  'compliance-assessments': 'Know where you stand. Framework-based gap analysis and risk assessment for NIS2, ISO 27001, GDPR and DORA, with a prioritized roadmap.',
+  'compliance-implementation': 'We help you close the gaps — policies, controls and evidence to get audit-ready for ISO 27001, NIS2, GDPR and DORA.',
+  'operational-cybersecurity': 'Senior security expertise on demand — virtual CISO, interim experts and ongoing advisory, scaled to your needs.',
+};
+---
+
+<Base title={`${d.title} | CyberCap`} description={metaMap[slug as string]}>
+  <section class="bg-ink">
+    <div class="container-c py-16 lg:py-20">
+      <p class="eyebrow">{d.eyebrow}</p>
+      <h1 class="h1 mt-3 text-white">{d.title}</h1>
+      <p class="mt-5 max-w-2xl text-lg leading-relaxed text-white/75">{d.lead}</p>
+      <a href="/contact" class="btn-primary mt-8">{d.ctaLabel}</a>
+    </div>
+  </section>
+
+  <div class="container-c grid gap-12 py-16 lg:grid-cols-3">
+    <!-- Main -->
+    <div class="lg:col-span-2 space-y-12">
+      <div>
+        <h2 class="text-2xl font-bold text-ink">What we do</h2>
+        <div class="mt-6 space-y-4">
+          {d.what.map((w) => (
+            <div class="flex gap-4">
+              <span class="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-teal/10 text-teal">
+                <Icon name="check" class="h-4 w-4" />
+              </span>
+              <p class="text-slate"><strong class="text-ink">{w.t}.</strong> {w.d}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="rounded-2xl bg-mist p-7">
+        <h2 class="text-2xl font-bold text-ink">What you get</h2>
+        <p class="mt-4 text-lg leading-relaxed text-slate">{d.outcome}</p>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="space-y-6">
+      <div class="rounded-2xl border border-cloud p-6">
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-slate">Who it’s for</h3>
+        <ul class="mt-4 space-y-3">
+          {d.who.map((w) => (
+            <li class="flex gap-3 text-sm text-slate">
+              <Icon name="check" class="mt-0.5 h-4 w-4 shrink-0 text-teal" />
+              <span>{w}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="rounded-2xl border border-cloud p-6">
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-slate">Frameworks</h3>
+        <p class="mt-3 font-medium text-ink">{d.frameworks}</p>
+      </div>
+      <a href="/contact" class="btn-primary w-full">{d.ctaLabel}</a>
+    </aside>
+  </div>
+
+  <CTABand />
+</Base>

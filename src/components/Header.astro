@@ -1,0 +1,41 @@
+---
+import { nav, site } from '../data/site';
+const path = Astro.url.pathname;
+const isActive = (href: string) => path === href || (href !== '/' && path.startsWith(href));
+---
+
+<header class="sticky top-0 z-40 border-b border-cloud bg-white/90 backdrop-blur">
+  <div class="container-c flex h-16 items-center justify-between">
+    <a href="/" class="flex items-center" aria-label={`${site.name} home`}>
+      <img src="/brand/logo-full.svg" alt={site.name} class="h-8 w-auto" />
+    </a>
+
+    <nav class="hidden items-center gap-8 md:flex" aria-label="Main">
+      {nav.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            'text-sm font-medium transition hover:text-ink',
+            isActive(item.href) ? 'text-ink' : 'text-slate',
+          ]}
+        >
+          {item.label}
+        </a>
+      ))}
+      <a href="/contact" class="btn-primary !px-5 !py-2 text-sm">Book a free consult</a>
+    </nav>
+
+    <!-- Mobile -->
+    <details class="relative md:hidden">
+      <summary class="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-lg border border-cloud" aria-label="Open menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0A2540" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </summary>
+      <div class="absolute right-0 mt-2 w-56 rounded-xl border border-cloud bg-white p-2 shadow-lg">
+        {nav.map((item) => (
+          <a href={item.href} class="block rounded-lg px-3 py-2 text-sm font-medium text-ink hover:bg-mist">{item.label}</a>
+        ))}
+        <a href="/contact" class="btn-primary mt-2 w-full text-sm">Book a free consult</a>
+      </div>
+    </details>
+  </div>
+</header>

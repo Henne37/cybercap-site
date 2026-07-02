@@ -1,0 +1,16 @@
+---
+import Icon from './Icon.astro';
+interface Props { slug: string; title: string; short: string; icon: string; }
+const { slug, title, short, icon } = Astro.props;
+---
+<a href={`/services/${slug}`} class="group flex flex-col rounded-2xl border border-cloud bg-white p-7 transition hover:-translate-y-1 hover:border-teal hover:shadow-lg">
+  <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-mist text-teal">
+    <Icon name={icon} />
+  </span>
+  <h3 class="mt-5 text-xl font-bold text-ink">{title}</h3>
+  <p class="mt-3 flex-1 text-slate">{short}</p>
+  <span class="mt-5 inline-flex items-center gap-2 font-semibold text-link">
+    Learn more
+    <Icon name="arrow" class="h-4 w-4 transition group-hover:translate-x-1" />
+  </span>
+</a>
