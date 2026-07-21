@@ -2,11 +2,9 @@
 export const site = {
   name: 'CyberCap',
   tagline: 'Cybersecurity & compliance advice for European businesses.',
-  // TODO: replace placeholders with real details before launch
-  email: 'hello@cybercap.be',
-  phone: '+32 (0)000 00 00 00',
+  email: 'info@cybercap.be',
   address: 'Belgium',
-  vat: 'BE 0000.000.000',
+  vat: 'BE 1001.430.572',
   // --- Lead capture config ---
   // 1) Formspree: create a free form at https://formspree.io and paste the form ID (the part
   //    after /f/ in your endpoint, e.g. "xmyzabcd"). Leave blank to disable submission.
